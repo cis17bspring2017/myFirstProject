@@ -55,9 +55,9 @@ void account::createHorizontalGroupBox()
 //        buttons[i] = new QPushButton(tr("Button %1").arg(i + 1));
 //        layout->addWidget(buttons[i]);
 //    }
-    QPushButton *buttons1 = new QPushButton(tr("Transfer"));
-    QPushButton *buttons2 = new QPushButton(tr("History"));
-    QPushButton *buttons3 = new QPushButton(tr("Back"));
+    QPushButton *buttons1 = new QPushButton(tr("Transfer"),this);
+    QPushButton *buttons2 = new QPushButton(tr("History"),this);
+    QPushButton *buttons3 = new QPushButton(tr("Summary"),this);
     layout->addWidget(buttons1);
     layout->addWidget(buttons2);
     layout->addWidget(buttons3);

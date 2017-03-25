@@ -26,9 +26,9 @@ void transfer::createHorizontalGroupBox()
      horizontalGroupBox = new QGroupBox(tr("Navigate Buttons"));
     QHBoxLayout *layout = new QHBoxLayout;
 
-    buttons1 = new QPushButton(tr("Yes, Transfer"));
+    buttons1 = new QPushButton(tr("Yes, Transfer"),this);
     layout->addWidget(buttons1);
-    buttons2 = new QPushButton(tr("No, Cancel"));
+    buttons2 = new QPushButton(tr("No, Cancel"),this);
     layout->addWidget(buttons2);
 
     horizontalGroupBox->setLayout(layout);

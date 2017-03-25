@@ -20,16 +20,14 @@ class summary : public QDialog
     Q_OBJECT
 
 public:
+    summary(QObject*);
     summary();
-public slots:
-    void switchWindow();
 
 private:
     //void createMenu();
     void createFormGroupBox();
     void createHorizontalGroupBox();
     void createGridGroupBox();
-    void exitWindow();
 
     enum { NumGridRows = 2, NumButtons = 4 };
 

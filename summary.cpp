@@ -7,7 +7,8 @@
 
 #include "summary.h"
 
-summary::summary()
+summary::summary(QObject*)
+
 {
     createHorizontalGroupBox();
     createFormGroupBox();
@@ -19,23 +20,25 @@ summary::summary()
     setLayout(mainLayout);
 
     setWindowTitle(windowLabel);
-    //QObject::connect(summary.button1,SIGNAL(button1.clicked()),
-                     //summary.swithWindow(),SLOT(changeWindow()));
+    connect( buttons1, SIGNAL(clicked())
+            , this, SLOT(historyButtonClick()));
+
+
 }
+
 
 void summary::createHorizontalGroupBox()
 {
     horizontalGroupBox = new QGroupBox(tr("Navigate Buttons"));
     QHBoxLayout *layout = new QHBoxLayout;
 
-    buttons1 = new QPushButton(tr("Transfer"));
+    buttons1 = new QPushButton(tr("Transfer"),this);
     layout->addWidget(buttons1);
-   // connect(button1, SIGNAL(clicked()), this, switchWindow());
-    buttons2 = new QPushButton(tr("Select"));
+    buttons2 = new QPushButton(tr("Select"),this);
     layout->addWidget(buttons2);
-    buttons3 = new QPushButton(tr("History"));
+    buttons3 = new QPushButton(tr("History"),this);
     layout->addWidget(buttons3);
-    buttons4 = new QPushButton(tr("Logout"));
+    buttons4 = new QPushButton(tr("Logout"),this);
     layout->addWidget(buttons4);
     horizontalGroupBox->setLayout(layout);
 }
@@ -72,16 +75,3 @@ void summary::createGridGroupBox()
 
     gridGroupBox->setLayout(layout);
 }
-//void switchWindow()
-//{
-
-//    //called when one of the buttons is clicked
-
-
-//    //transfer button is clicked exit window
-//   // QWidget.close();
-
-//    //open other window
-//    changeWindow(2);
-
-//}

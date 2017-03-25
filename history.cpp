@@ -22,13 +22,7 @@ void history::createGridGroupBox()
     gridGroupBox = new QGroupBox(tr("Transaction History - Checking"));
     QGridLayout *layout = new QGridLayout;
 
-//    for (int i = 0; i < NumGridRows; ++i) {
-//        labels[i] = new QLabel(tr("Line %1:").arg(i + 1));
-//        lineEdits[i] = new QLineEdit;
-//        layout->addWidget(labels[i], i + 1, 0);
-//        layout->addWidget(lineEdits[i], i + 1, 1);
-//    }
-    QLabel *labelTransNum = new QLabel(tr("Transfer Num."));
+QLabel *labelTransNum = new QLabel(tr("Transfer Num."));
     QLabel *labelOldBalance = new QLabel(tr("Previous Balance"));
     QLabel *labelNewBalance = new QLabel(tr("Current Balance"));
     QLabel *labelDateTitle = new QLabel(tr("Date-Time"));
@@ -67,9 +61,9 @@ void history::createHorizontalGroupBox()
 //        buttons[i] = new QPushButton(tr("Button %1").arg(i + 1));
 //        layout->addWidget(buttons[i]);
 //    }
-    QPushButton *buttons1 = new QPushButton(tr("Transfer"));
-    QPushButton *buttons2 = new QPushButton(tr("History"));
-    QPushButton *buttons3 = new QPushButton(tr("Summary"));
+    QPushButton *buttons1 = new QPushButton(tr("Transfer"),this);
+    QPushButton *buttons2 = new QPushButton(tr("History"),this);
+    QPushButton *buttons3 = new QPushButton(tr("Summary"),this);
     layout->addWidget(buttons1);
     layout->addWidget(buttons2);
     layout->addWidget(buttons3);
