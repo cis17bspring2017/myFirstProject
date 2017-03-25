@@ -10,7 +10,7 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-
+//call class that will run the app
     bankSoftware();
 
     return app.exec();

@@ -22,6 +22,8 @@ class summary : public QDialog
 public:
     summary(QObject*);
     summary();
+    //two constructors, I think this allow creating
+    //and creating pointer to an instance
 
 private:
     //void createMenu();

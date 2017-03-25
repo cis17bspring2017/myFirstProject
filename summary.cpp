@@ -20,15 +20,17 @@ summary::summary(QObject*)
     setLayout(mainLayout);
 
     setWindowTitle(windowLabel);
+
+//this should connect the history button to the slot in banksoftware()
     connect( buttons1, SIGNAL(clicked())
             , this, SLOT(historyButtonClick()));
-
 
 }
 
 
 void summary::createHorizontalGroupBox()
 {
+//creates the navigation buttons for this window
     horizontalGroupBox = new QGroupBox(tr("Navigate Buttons"));
     QHBoxLayout *layout = new QHBoxLayout;
 
@@ -44,6 +46,7 @@ void summary::createHorizontalGroupBox()
 }
 void summary::createFormGroupBox()
 {
+    //creates the labes for the content of the window
     formGroupBox = new QGroupBox(tr("Account_Info"));
     QFormLayout *layout = new QFormLayout;
     layout->addRow(new QLabel(tr("Checking:")), new QLineEdit);
@@ -51,7 +54,9 @@ void summary::createFormGroupBox()
     formGroupBox->setLayout(layout);
 }
 void summary::createGridGroupBox()
-{
+{   //creates a gridbox to hold the info
+    //intent is to pass an account class to
+    //populate the grid wth live info
     gridGroupBox = new QGroupBox(tr("Grid layout"));
     QGridLayout *layout = new QGridLayout;
 
