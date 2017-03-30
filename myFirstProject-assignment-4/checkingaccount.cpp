@@ -12,7 +12,7 @@ Checkingaccount::Checkingaccount(int IdNbr, QString owner
     setOwner(owner);
     setBalance(balance);
     setDate(date);
-     accountType = "Winning";
+     accountType = "Checking";
 
 }
 

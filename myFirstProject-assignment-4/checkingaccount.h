@@ -22,7 +22,7 @@ class Checkingaccount
 
     protected:
         QString accountType;
-        const int overDraftFee = 30; //in dollars
+        const int overDraftFee = 35; //in dollars
         int accountId = 0;
         double accountBalance= 0;
         QString userName;

@@ -18,6 +18,7 @@ BankWindow::BankWindow(Checkingaccount* cAcc, Savingsaccount* sAcc)
 
     mainLayout = new QVBoxLayout;
     windowLayout = new QGridLayout;
+    setWindowLabel("Window");
 
 
     createBankGridGroupBox();
@@ -43,30 +44,31 @@ BankWindow::BankWindow(Checkingaccount* cAcc, Savingsaccount* sAcc)
 void BankWindow::createBankGridGroupBox()
  {  // creates gridGroupBox,widgets and windowLayout
 
-        gridGroupBox = new QGroupBox(tr("Bank Account"));
+        gridGroupBox = new QGroupBox();
+        this->setWindowTitle(windowLabel);
         //column Labels
-        for (int i = 0; i <= numGridRows; ++i)
+        for (int i = 0; i < numGridRows; i++)
         {
             columnLabels[i] = new QLabel(SummColNames[i]);
-            windowLayout->addWidget(columnLabels[i],0,i);
+            windowLayout->addWidget(columnLabels[i],1,i);
         }
         //first row of fields
         for (int i = 0; i < numGridColumns; ++i)
         {
             rowOneLabels[i] = new QLabel(tr(""));
-            windowLayout->addWidget(rowOneLabels[i],1,i);
+            windowLayout->addWidget(rowOneLabels[i],2,i);
         }
         //second row of fields
         for (int i = 0; i < numGridColumns; ++i)
         {
             rowTwoLabels[i] = new QLabel(tr(""));
-            windowLayout->addWidget(rowTwoLabels[i],2,i);
+            windowLayout->addWidget(rowTwoLabels[i],3,i);
         }
         //third row of fields
         for (int i = 0; i < numGridColumns; ++i)
         {
             rowThreeLabels[i] = new QLabel(tr(""));
-            windowLayout->addWidget(rowThreeLabels[i],3,i);
+            windowLayout->addWidget(rowThreeLabels[i],4,i);
         }
 
         buttonsNav1 = new QPushButton(tr("Summary"));
@@ -78,10 +80,10 @@ void BankWindow::createBankGridGroupBox()
 
         windowLayout->addWidget(buttonsSavings,2,0);
         windowLayout->addWidget(buttonsChecking,1,0);
-        windowLayout->addWidget(buttonsNav1,4,1);
-        windowLayout->addWidget(buttonsNav2,4,2);
-        windowLayout->addWidget(buttonsNav3,4,3);
-        windowLayout->addWidget(buttonsNav4,4,4);
+        windowLayout->addWidget(buttonsNav1,5,1);
+        windowLayout->addWidget(buttonsNav2,5,2);
+        windowLayout->addWidget(buttonsNav3,5,3);
+        windowLayout->addWidget(buttonsNav4,5,4);
         gridGroupBox->setLayout(windowLayout);
 
         setWindowTitle(windowLabel);
@@ -91,8 +93,9 @@ void BankWindow::createBankGridGroupBox()
 
  void BankWindow::summaryWindow()
  {  //setText() is used to change label text
-     gridGroupBox->setTitle("Bank Account");
+
      setWindowLabel("Summary Window");
+     this->setWindowTitle(windowLabel);
      gridGroupBox->setTitle(tr("Select Account or choose other function."));
 
      //define column labels
@@ -102,6 +105,7 @@ void BankWindow::createBankGridGroupBox()
      }
 
      //first row of fields
+      rowOneLabels[0]->setText(tr(""));
       rowOneLabels[1]->setText(chkAcc->getAccountType());
       rowOneLabels[2]->setText(QString::number(chkAcc->getBalance()));
       rowOneLabels[3]->setText(chkAcc->getDate());
@@ -109,10 +113,11 @@ void BankWindow::createBankGridGroupBox()
 
 
      //second row of fields
-        rowTwoLabels[1]->setText(savAcc->getAccountType());
-        rowTwoLabels[2]->setText(QString::number(savAcc->getAccountBalance()));
-        rowTwoLabels[3]->setText(savAcc->getUpdate());
-        rowTwoLabels[4]->setText(tr(""));
+      rowTwoLabels[0]->setText(tr(""));
+      rowTwoLabels[1]->setText(savAcc->getAccountType());
+      rowTwoLabels[2]->setText(QString::number(savAcc->getAccountBalance()));
+      rowTwoLabels[3]->setText(savAcc->getUpdate());
+      rowTwoLabels[4]->setText(tr(""));
 
      //third row of fields
      for (int i = 0; i < numGridColumns; ++i)
@@ -125,7 +130,7 @@ void BankWindow::createBankGridGroupBox()
 
      buttonsNav1->hide();
      buttonsNav2->show();
-     buttonsNav3->show();
+     buttonsNav3->hide();
      buttonsChecking->show();
      buttonsSavings->show();
 
@@ -136,20 +141,21 @@ void BankWindow::createBankGridGroupBox()
  void BankWindow::transferWindow()
  {
      //windowLayout->removeWidget(gridGroupBox);
-     gridGroupBox->setTitle("Bank Account");
-
     setWindowLabel("Transfer Window");
-    for (int i = 0; i < numGridRows; ++i)
+
+    this->setWindowTitle(windowLabel);
+
+    for (int i = 0; i < numGridRows; i++)
     {
         columnLabels[i]->setText("");
     }
     //first row of fields
-    for (int i = 0; i < numGridColumns; ++i)
+    for (int i = 0; i < numGridColumns; i++)
     {
         rowOneLabels[i]->setText("");
     }
     //second row of fields
-    for (int i = 0; i < numGridColumns; ++i)
+    for (int i = 0; i < numGridColumns; i++)
     {
         rowTwoLabels[i]->setText("");
     }
@@ -161,7 +167,7 @@ void BankWindow::createBankGridGroupBox()
 
     buttonsNav1->show();
     buttonsNav2->hide();
-    buttonsNav3->show();
+    buttonsNav3->hide();
     buttonsChecking->hide();
     buttonsSavings->hide();
     makeWindow();

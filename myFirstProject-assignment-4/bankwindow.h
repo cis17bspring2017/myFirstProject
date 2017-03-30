@@ -43,7 +43,7 @@ public slots:
     void checkBalanceWindow();
     void savingsBalanceWindow();
 
-protected:
+private:
     void createBankGridGroupBox();
     void setWindowLabel(QString);
     void makeWindow();
@@ -70,7 +70,7 @@ protected:
     QLabel *fillLabels;
     QLineEdit *lineEdits[numGridRows];
     QString SummColNames[numColLabels] =
-            {" ", "Account", "Balance", "Updated", " "};
+    {" ", "Account", "Balance", "Updated", " "};
     QString chkBalColNames[numColLabels] =
             {"Account", "Owner", "Balance", "OverDraft Fee", "Last Update"};
     QString savBalColNames[numColLabels] =

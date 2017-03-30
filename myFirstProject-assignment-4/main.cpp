@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
     Savingsaccount* secondAccount = new Savingsaccount(2,  "I M Rich", 13777.25, "2/31/2017");
 
     BankWindow bob(firstAccount, secondAccount);
+
     bob.show();
 
     return app.exec();
