@@ -1,3 +1,4 @@
+//CIS-17B_Spring-2017_Jon LaRock, Greg Hanna
 #ifndef CHECKINGACCOUNT_H
 #define CHECKINGACCOUNT_H
 
@@ -20,7 +21,7 @@ class Checkingaccount
         int getOverDraftFee();
         QString getAccountType();
 
-    protected:
+    private:
         QString accountType;
         const int overDraftFee = 35; //in dollars
         int accountId = 0;
@@ -29,7 +30,7 @@ class Checkingaccount
         QString update;
 
 
-    private:
+
 };
 
 #endif // CHECKINGACCOUNT_H

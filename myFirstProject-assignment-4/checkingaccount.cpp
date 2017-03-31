@@ -1,9 +1,5 @@
+//CIS-17B_Spring-2017_Jon LaRock, Greg Hanna
 #include "checkingaccount.h"
-
-//Checkingaccount::Checkingaccount()
-//{
-
-//}
 
 Checkingaccount::Checkingaccount(int IdNbr, QString owner
                                  , float balance, QString date)

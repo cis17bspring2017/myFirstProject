@@ -1,3 +1,4 @@
+//CIS-17B_Spring-2017_Jon LaRock, Greg Hanna
 #ifndef SAVINGSACCOUNT_H
 #define SAVINGSACCOUNT_H
 
@@ -19,7 +20,7 @@ public:
     float getInterestRate();
     QString getAccountType();
 
-protected:
+private:
    int accountId = 0;
     float accountBalance= 0;
     QString userName;

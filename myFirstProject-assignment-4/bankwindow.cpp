@@ -1,3 +1,4 @@
+//CIS-17B_Spring-2017_Jon LaRock, Greg Hanna
 #include <QtWidgets>
 #include <QWidget>
 #include <QDialog>
@@ -5,7 +6,6 @@
 #include<QApplication>
 
 #include "bankwindow.h"
-#include "account.h"
 #include "savingsaccount.h"
 #include "checkingaccount.h"
 
@@ -46,6 +46,8 @@ void BankWindow::createBankGridGroupBox()
 
         gridGroupBox = new QGroupBox();
         this->setWindowTitle(windowLabel);
+        QFont font ("Tahoma",11,60);
+        this->setFont(font);
         //column Labels
         for (int i = 0; i < numGridRows; i++)
         {
@@ -78,8 +80,8 @@ void BankWindow::createBankGridGroupBox()
         buttonsChecking = new QPushButton(tr("Checking"));
         buttonsSavings = new QPushButton(tr("Savings"));
 
-        windowLayout->addWidget(buttonsSavings,2,0);
-        windowLayout->addWidget(buttonsChecking,1,0);
+        windowLayout->addWidget(buttonsSavings,3,0);
+        windowLayout->addWidget(buttonsChecking,2,0);
         windowLayout->addWidget(buttonsNav1,5,1);
         windowLayout->addWidget(buttonsNav2,5,2);
         windowLayout->addWidget(buttonsNav3,5,3);
@@ -107,15 +109,15 @@ void BankWindow::createBankGridGroupBox()
      //first row of fields
       rowOneLabels[0]->setText(tr(""));
       rowOneLabels[1]->setText(chkAcc->getAccountType());
-      rowOneLabels[2]->setText(QString::number(chkAcc->getBalance()));
+      rowOneLabels[2]->setText(tr("$") + QString::number(chkAcc->getBalance()));
       rowOneLabels[3]->setText(chkAcc->getDate());
-      rowOneLabels[4]->setText(tr(""));
+      rowOneLabels[4]->setText(chkAcc->getOwner());
 
 
      //second row of fields
       rowTwoLabels[0]->setText(tr(""));
       rowTwoLabels[1]->setText(savAcc->getAccountType());
-      rowTwoLabels[2]->setText(QString::number(savAcc->getAccountBalance()));
+      rowTwoLabels[2]->setText(tr("$") + QString::number(savAcc->getAccountBalance()));
       rowTwoLabels[3]->setText(savAcc->getUpdate());
       rowTwoLabels[4]->setText(tr(""));
 
@@ -223,9 +225,11 @@ void BankWindow::setWindowLabel(QString newLabel)
 
 void BankWindow::checkBalanceWindow()
 {
+    setWindowLabel("Checking Balance Window");
+    this->setWindowTitle(windowLabel);
     buttonsNav1->show();
     buttonsNav2->show();
-    buttonsNav3->show();
+    buttonsNav3->hide();
     buttonsChecking->hide();
     buttonsSavings->hide();
 
@@ -240,8 +244,8 @@ void BankWindow::checkBalanceWindow()
     //first row of fields
      rowOneLabels[0]->setText(chkAcc->getAccountType());
      rowOneLabels[1]->setText(chkAcc->getOwner());
-     rowOneLabels[2]->setText(QString::number(chkAcc->getBalance()));
-     rowOneLabels[3]->setText(QString::number(chkAcc->getOverDraftFee()));
+     rowOneLabels[2]->setText(tr("$") + QString::number(chkAcc->getBalance()));
+     rowOneLabels[3]->setText(tr("$") + QString::number(chkAcc->getOverDraftFee()));
      rowOneLabels[4]->setText(chkAcc->getDate());
 
 
@@ -256,9 +260,11 @@ void BankWindow::checkBalanceWindow()
 
 void BankWindow::savingsBalanceWindow()
 {
+    setWindowLabel("Savings Balance Window");
+    this->setWindowTitle(windowLabel);
     buttonsNav1->show();
     buttonsNav2->show();
-    buttonsNav3->show();
+    buttonsNav3->hide();
     buttonsChecking->hide();
     buttonsSavings->hide();
 
@@ -273,7 +279,7 @@ void BankWindow::savingsBalanceWindow()
     //first row of fields
      rowOneLabels[0]->setText(savAcc->getAccountType());
      rowOneLabels[1]->setText(savAcc->getUserName());
-     rowOneLabels[2]->setText(QString::number(savAcc->getAccountBalance()));
+     rowOneLabels[2]->setText(tr("$") + QString::number(savAcc->getAccountBalance()));
      rowOneLabels[3]->setText(QString::number(savAcc->getInterestRate()));
      rowOneLabels[4]->setText(savAcc->getUpdate());
 

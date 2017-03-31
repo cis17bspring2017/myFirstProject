@@ -1,3 +1,4 @@
+//CIS-17B_Spring-2017_Jon LaRock, Greg Hanna
 #ifndef BANKWINDOW_H
 #define BANKWINDOW_H
 
@@ -70,11 +71,11 @@ private:
     QLabel *fillLabels;
     QLineEdit *lineEdits[numGridRows];
     QString SummColNames[numColLabels] =
-    {" ", "Account", "Balance", "Updated", " "};
+    {" ", " Account ", " Balance ", " Updated ", " Owner "};
     QString chkBalColNames[numColLabels] =
-            {"Account", "Owner", "Balance", "OverDraft Fee", "Last Update"};
+            {" Account ", " Owner ", " Balance ", " OverDraft Fee ", " Last Update "};
     QString savBalColNames[numColLabels] =
-            {"Account", "Owner", "Balance", "Interest Rate", "Last Update"};
+            {" Account ", " Owner ", " Balance ", " Interest Rate ", " Last Update "};
     QGroupBox *gridGroupBox;
 
     QString navButtonNames[numNavButtons] = {"Summary", "Transfer", "History", "Exit"};
