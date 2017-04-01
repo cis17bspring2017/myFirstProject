@@ -22,7 +22,7 @@ BankWindow::BankWindow(Checkingaccount* cAcc, Savingsaccount* sAcc)
 
 
     createBankGridGroupBox();
-    summaryWindow();
+    transferWindow();
 
 //create accounts
 
@@ -38,6 +38,14 @@ BankWindow::BankWindow(Checkingaccount* cAcc, Savingsaccount* sAcc)
                 this, SLOT(checkBalanceWindow()));
     connect( buttonsSavings, SIGNAL(clicked()),
                 this, SLOT(savingsBalanceWindow()));
+    connect( buttonsToSelect, SIGNAL(clicked()),
+                this, SLOT(chooseToAccount()));
+    connect( buttonsFromSelect, SIGNAL(clicked()),
+                this, SLOT(chooseFromAccount()));
+    connect( buttonsYesTransfer, SIGNAL(clicked()),
+                this, SLOT(tranferFunds()));
+    connect( buttonsNoCancel, SIGNAL(clicked()),
+                this, SLOT(summaryWindow()));
 }
 
 
@@ -79,19 +87,19 @@ void BankWindow::createBankGridGroupBox()
         buttonsSavings = new QPushButton(tr("Savings"));
         buttonsFromSelect = new QPushButton(tr("Transfer &From"));
         buttonsToSelect = new QPushButton(tr("Transfer &To"));
-        buttonsToSelect = new QPushButton(tr("Yes, Transfer"));
-        buttonsToSelect = new QPushButton(tr("No, Cancel"));
+        buttonsYesTransfer = new QPushButton(tr("Yes, Transfer"));
+        buttonsNoCancel = new QPushButton(tr("No, Cancel"));
 
         windowLayout->addWidget(buttonsSavings,2,0);
-        windowLayout->addWidget(buttonsChecking,1,0);
+        windowLayout->addWidget(buttonsChecking,3,0);
         windowLayout->addWidget(buttonsNav1,5,1);
         windowLayout->addWidget(buttonsNav2,5,2);
         windowLayout->addWidget(buttonsNav3,5,3);
         windowLayout->addWidget(buttonsNav4,5,4);
         windowLayout->addWidget(buttonsFromSelect,2,0);
         windowLayout->addWidget(buttonsToSelect,3,0);
-        windowLayout->addWidget(buttonsYesTransfer,4,3);
-        windowLayout->addWidget(buttonsNoCancel,4,4);
+        windowLayout->addWidget(buttonsYesTransfer,4,2);
+        windowLayout->addWidget(buttonsNoCancel,4,3);
         gridGroupBox->setLayout(windowLayout);
 
         setWindowTitle(windowLabel);
@@ -139,6 +147,11 @@ void BankWindow::createBankGridGroupBox()
      buttonsNav1->hide();
      buttonsNav2->show();
      buttonsNav3->hide();
+     buttonsNav4->show();
+     buttonsToSelect->hide();
+     buttonsFromSelect->hide();
+     buttonsYesTransfer->hide();
+     buttonsNoCancel->hide();
      buttonsChecking->show();
      buttonsSavings->show();
 
@@ -178,10 +191,14 @@ void BankWindow::createBankGridGroupBox()
     buttonsNav1->hide();
     buttonsNav2->hide();
     buttonsNav3->hide();
+    buttonsNav4->hide();
     buttonsChecking->hide();
     buttonsSavings->hide();
-    buttonsNoCancel->show();
+    buttonsFromSelect->show();
+    buttonsToSelect->show();
     buttonsYesTransfer->show();
+    buttonsNoCancel->show();
+
     makeWindow();
  }
 
@@ -216,6 +233,7 @@ void BankWindow::createBankGridGroupBox()
     buttonsNav1->show();
     buttonsNav2->show();
     buttonsNav3->hide();
+    buttonsNav4->show();
     buttonsChecking->hide();
     buttonsSavings->hide();
 
@@ -238,6 +256,7 @@ void BankWindow::checkBalanceWindow()
     buttonsNav1->show();
     buttonsNav2->show();
     buttonsNav3->show();
+    buttonsNav4->show();
     buttonsChecking->hide();
     buttonsSavings->hide();
 
@@ -271,6 +290,7 @@ void BankWindow::savingsBalanceWindow()
     buttonsNav1->show();
     buttonsNav2->show();
     buttonsNav3->show();
+    buttonsNav4->show();
     buttonsChecking->hide();
     buttonsSavings->hide();
 
@@ -305,3 +325,19 @@ void BankWindow::makeWindow()
    mainLayout->addWidget(gridGroupBox);
    setLayout(mainLayout);
 }
+
+void BankWindow::chooseToAccount()
+{
+
+}
+
+void BankWindow::chooseFromAccount()
+{
+
+}
+
+void BankWindow::tranferFunds()
+{
+
+}
+

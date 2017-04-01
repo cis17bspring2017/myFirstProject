@@ -5,7 +5,6 @@
 #include<QApplication>
 
 #include "bankwindow.h"
-#include "account.h"
 #include "savingsaccount.h"
 #include "checkingaccount.h"
 

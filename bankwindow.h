@@ -42,6 +42,9 @@ public slots:
     void exitWindow();
     void checkBalanceWindow();
     void savingsBalanceWindow();
+    void chooseToAccount();
+    void chooseFromAccount();
+    void tranferFunds();
 
 private:
     void createBankGridGroupBox();
