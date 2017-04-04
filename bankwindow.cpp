@@ -22,7 +22,7 @@ BankWindow::BankWindow(Checkingaccount* cAcc, Savingsaccount* sAcc)
 
 
     createBankGridGroupBox();
-    transferWindow();
+    summaryWindow();
 
 //create accounts
 
@@ -38,10 +38,10 @@ BankWindow::BankWindow(Checkingaccount* cAcc, Savingsaccount* sAcc)
                 this, SLOT(checkBalanceWindow()));
     connect( buttonsSavings, SIGNAL(clicked()),
                 this, SLOT(savingsBalanceWindow()));
-    connect( buttonsToSelect, SIGNAL(clicked()),
-                this, SLOT(chooseToAccount()));
-    connect( buttonsFromSelect, SIGNAL(clicked()),
-                this, SLOT(chooseFromAccount()));
+    connect( toSelectCombobox, SIGNAL(currentIndexChanged(int)),
+                this, SLOT(chooseToAccount(int)));
+    connect( fromSelectCombobox, SIGNAL(currentIndexChanged(int)),
+                this, SLOT(chooseFromAccount(int)));
     connect( buttonsYesTransfer, SIGNAL(clicked()),
                 this, SLOT(tranferFunds()));
     connect( buttonsNoCancel, SIGNAL(clicked()),
@@ -85,10 +85,18 @@ void BankWindow::createBankGridGroupBox()
         buttonsNav4 = new QPushButton(tr("Exit"));
         buttonsChecking = new QPushButton(tr("Checking"));
         buttonsSavings = new QPushButton(tr("Savings"));
-        buttonsFromSelect = new QPushButton(tr("Transfer &From"));
-        buttonsToSelect = new QPushButton(tr("Transfer &To"));
         buttonsYesTransfer = new QPushButton(tr("Yes, Transfer"));
         buttonsNoCancel = new QPushButton(tr("No, Cancel"));
+        fromSelectCombobox = new QComboBox;
+        fromSelectCombobox->insertItem(0 ,"Select Account");
+        fromSelectCombobox->insertItem(1, "Checking");
+        fromSelectCombobox->insertItem(2, "Savings");
+        toSelectCombobox = new QComboBox;
+        toSelectCombobox->insertItem(0 ,"Select Account");
+        toSelectCombobox->insertItem(1, "Checking");
+        toSelectCombobox->insertItem(2, "Savings");
+        transferLineEdit = new QLineEdit;
+        transferLineEdit->setValidator( new QIntValidator(0, 10000000, this) );//not expected to have more than $10,000,000
 
         windowLayout->addWidget(buttonsSavings,2,0);
         windowLayout->addWidget(buttonsChecking,3,0);
@@ -96,10 +104,12 @@ void BankWindow::createBankGridGroupBox()
         windowLayout->addWidget(buttonsNav2,5,2);
         windowLayout->addWidget(buttonsNav3,5,3);
         windowLayout->addWidget(buttonsNav4,5,4);
-        windowLayout->addWidget(buttonsFromSelect,2,0);
-        windowLayout->addWidget(buttonsToSelect,3,0);
+        windowLayout->addWidget(fromSelectCombobox,2,0);
+        windowLayout->addWidget(toSelectCombobox,3,0);
         windowLayout->addWidget(buttonsYesTransfer,4,2);
         windowLayout->addWidget(buttonsNoCancel,4,3);
+        windowLayout->addWidget(transferLineEdit,2,3);
+
         gridGroupBox->setLayout(windowLayout);
 
         setWindowTitle(windowLabel);
@@ -148,13 +158,13 @@ void BankWindow::createBankGridGroupBox()
      buttonsNav2->show();
      buttonsNav3->hide();
      buttonsNav4->show();
-     buttonsToSelect->hide();
-     buttonsFromSelect->hide();
+     toSelectCombobox->hide();
+     fromSelectCombobox->hide();
      buttonsYesTransfer->hide();
      buttonsNoCancel->hide();
      buttonsChecking->show();
      buttonsSavings->show();
-
+     transferLineEdit->hide();
      makeWindow();
 
  }
@@ -171,13 +181,13 @@ void BankWindow::createBankGridGroupBox()
         columnLabels[i]->setText(transferColNames[i]);
     }
     //first row of fields
-    buttonsFromSelect->show();
+    fromSelectCombobox->show();
     for (int i = 0; i < numGridColumns; i++)
     {
         rowOneLabels[i]->setText("");
     }
     //second row of fields
-    buttonsToSelect->show();
+    toSelectCombobox->show();
     for (int i = 0; i < numGridColumns; i++)
     {
         rowTwoLabels[i]->setText("");
@@ -194,10 +204,11 @@ void BankWindow::createBankGridGroupBox()
     buttonsNav4->hide();
     buttonsChecking->hide();
     buttonsSavings->hide();
-    buttonsFromSelect->show();
-    buttonsToSelect->show();
+    toSelectCombobox->show();
+    fromSelectCombobox->show();
     buttonsYesTransfer->show();
     buttonsNoCancel->show();
+    transferLineEdit->show();
 
     makeWindow();
  }
@@ -236,6 +247,8 @@ void BankWindow::createBankGridGroupBox()
     buttonsNav4->show();
     buttonsChecking->hide();
     buttonsSavings->hide();
+    toSelectCombobox->hide();
+    fromSelectCombobox->hide();
 
     makeWindow();
   }
@@ -326,14 +339,45 @@ void BankWindow::makeWindow()
    setLayout(mainLayout);
 }
 
-void BankWindow::chooseToAccount()
+void BankWindow::chooseToAccount(int index)
 {
-
+        switch (index)
+        {
+        case 0: //clear account info
+            rowTwoLabels[2]->setText("");
+        break;
+        case 1: //read checking account info
+            rowTwoLabels[2]->setText(tr("$") + QString::number(chkAcc->getBalance()));
+        break;
+        case 2: //read savings accoutn info
+            rowTwoLabels[2]->setText(tr("$") + QString::number(savAcc->getAccountBalance()));
+        break;
+         }
+        if (index == fromSelectCombobox->currentIndex())
+        {
+            fromSelectCombobox->setCurrentIndex(0);
+        }
 }
 
-void BankWindow::chooseFromAccount()
+void BankWindow::chooseFromAccount(int index)
 {
+    switch (index)
+    {
+    case 0: //clear account info
+        rowOneLabels[2]->setText("");
+    break;
+    case 1: //read checking account info
+        rowOneLabels[2]->setText(tr("$") + QString::number(chkAcc->getBalance()));
+    break;
+    case 2: //read savings accoutn info
+        rowOneLabels[2]->setText(tr("$") + QString::number(savAcc->getAccountBalance()));
+    break;
 
+    }
+    if (index == toSelectCombobox->currentIndex())
+    {
+        toSelectCombobox->setCurrentIndex(0);
+    }
 }
 
 void BankWindow::tranferFunds()

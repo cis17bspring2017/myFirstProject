@@ -17,6 +17,8 @@ class QPushButton;
 class QGroupBox;
 class QBoxLayout;
 class QDialog;
+class QComboBox;
+
 
 
 class  BankWindow : public QDialog
@@ -42,8 +44,8 @@ public slots:
     void exitWindow();
     void checkBalanceWindow();
     void savingsBalanceWindow();
-    void chooseToAccount();
-    void chooseFromAccount();
+    void chooseToAccount(int);
+    void chooseFromAccount(int);
     void tranferFunds();
 
 private:
@@ -57,8 +59,6 @@ private:
     QPushButton *buttonsNav4;
     QPushButton *buttonsChecking;
     QPushButton *buttonsSavings;
-    QPushButton *buttonsFromSelect;
-    QPushButton *buttonsToSelect;
     QPushButton *buttonsYesTransfer;
     QPushButton *buttonsNoCancel;
 
@@ -70,7 +70,9 @@ private:
     QGridLayout *windowLayout;
     QVBoxLayout *mainLayout;
     QGroupBox *gridGroupBox;
-
+    QComboBox *toSelectCombobox;
+    QComboBox *fromSelectCombobox;
+    QLineEdit *transferLineEdit;
     QLabel *fillLabels;
     QLineEdit *lineEdits[numGridRows];
     QString SummColNames[numColLabels] =
