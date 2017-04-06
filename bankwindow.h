@@ -31,6 +31,7 @@ public:
 
     void transferError();
     void transferMoney(float, float);
+    void selectError();
 
     enum
     {
