@@ -423,13 +423,19 @@ void BankWindow::tranferFunds()
                            + chkAcc->getOverDraftFee()
                            + chkAcc->getOverDraft()) && ((fromAccountBalance -transferFunds)< 0) )
         {
-            toSum = toAccountBalance + transferFunds;
-            fromSum = fromAccountBalance
-                    - (transferFunds + chkAcc->getOverDraftFee());
-            transferLineEdit->setText(tr(""));
-            transferMoney(toSum, fromSum);
-            cancelTransfer(); //after transfer reset window and return
-
+            if (accountType = "Savings")
+            {
+                transferError();
+            }
+            else
+            {
+                toSum = toAccountBalance + transferFunds;
+                fromSum = fromAccountBalance
+                        - (transferFunds + chkAcc->getOverDraftFee());
+                transferLineEdit->setText(tr(""));
+                transferMoney(toSum, fromSum);
+                cancelTransfer(); //after transfer reset window and return
+            }
         }
 
 }

@@ -19,8 +19,8 @@ public:
     float getInterestRate();
     QString getAccountType();
 
-protected:
-   int accountId = 0;
+private:
+    int accountId = 0;
     float accountBalance= 0;
     QString userName;
     QString update;
