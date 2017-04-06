@@ -400,14 +400,14 @@ void BankWindow::tranferFunds()
         {
             transferLineEdit->setText(tr("0.0"));
         }
-        if (transferFunds  > (fromAccountBalance
+        else if (transferFunds  > (fromAccountBalance
                               + chkAcc->getOverDraftFee()
                               + chkAcc->getOverDraft()))
                 //transferring too much
         {
             transferError();
         }
-        if (((fromAccountBalance) - transferFunds) > 0)
+        else if (((fromAccountBalance) - transferFunds) > 0)
         {
                     toSum = toAccountBalance + transferFunds;
                     fromSum = fromAccountBalance - transferFunds;
@@ -415,6 +415,19 @@ void BankWindow::tranferFunds()
                     transferMoney(toSum, fromSum);
                     cancelTransfer(); //after transfer reset window and return
          }
+        else if (transferFunds  < (fromAccountBalance
+                           + chkAcc->getOverDraftFee()
+                           + chkAcc->getOverDraft()) && ((fromAccountBalance -transferFunds)< 0) )
+        {
+            toSum = toAccountBalance + transferFunds;
+            fromSum = fromAccountBalance
+                    - (transferFunds + chkAcc->getOverDraftFee());
+            transferLineEdit->setText(tr(""));
+            transferMoney(toSum, fromSum);
+            cancelTransfer(); //after transfer reset window and return
+
+        }
+
 }
 
 void BankWindow::transferError()
