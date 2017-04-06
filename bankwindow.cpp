@@ -45,7 +45,7 @@ BankWindow::BankWindow(Checkingaccount* cAcc, Savingsaccount* sAcc)
     connect( buttonsYesTransfer, SIGNAL(clicked()),
                 this, SLOT(tranferFunds()));
     connect( buttonsNoCancel, SIGNAL(clicked()),
-                this, SLOT(summaryWindow()));
+                this, SLOT(cancelTransfer()));
 }
 
 
@@ -96,7 +96,7 @@ void BankWindow::createBankGridGroupBox()
         toSelectCombobox->insertItem(1, "Checking");
         toSelectCombobox->insertItem(2, "Savings");
         transferLineEdit = new QLineEdit;
-        transferLineEdit->setValidator( new QIntValidator(0, 10000000, this) );//not expected to have more than $10,000,000
+        transferLineEdit->setValidator( new QDoubleValidator(0, 10000000, 2, this) );//not expected to have more than $10,000,000
 
         windowLayout->addWidget(buttonsSavings,2,0);
         windowLayout->addWidget(buttonsChecking,3,0);
@@ -347,15 +347,19 @@ void BankWindow::chooseToAccount(int index)
             rowTwoLabels[2]->setText("");
         break;
         case 1: //read checking account info
-            rowTwoLabels[2]->setText(tr("$") + QString::number(chkAcc->getBalance()));
+            rowTwoLabels[2]->setText(QString::number(chkAcc->getBalance()));
         break;
         case 2: //read savings accoutn info
-            rowTwoLabels[2]->setText(tr("$") + QString::number(savAcc->getAccountBalance()));
+            rowTwoLabels[2]->setText(QString::number(savAcc->getAccountBalance()));
         break;
          }
         if (index == fromSelectCombobox->currentIndex())
         {
             fromSelectCombobox->setCurrentIndex(0);
+        }
+        if (index != toSelectCombobox->currentIndex())
+        {
+            toSelectCombobox->setCurrentIndex(index);
         }
 }
 
@@ -367,10 +371,10 @@ void BankWindow::chooseFromAccount(int index)
         rowOneLabels[2]->setText("");
     break;
     case 1: //read checking account info
-        rowOneLabels[2]->setText(tr("$") + QString::number(chkAcc->getBalance()));
+        rowOneLabels[2]->setText(QString::number(chkAcc->getBalance()));
     break;
     case 2: //read savings accoutn info
-        rowOneLabels[2]->setText(tr("$") + QString::number(savAcc->getAccountBalance()));
+        rowOneLabels[2]->setText(QString::number(savAcc->getAccountBalance()));
     break;
 
     }
@@ -378,10 +382,76 @@ void BankWindow::chooseFromAccount(int index)
     {
         toSelectCombobox->setCurrentIndex(0);
     }
+    if (index != fromSelectCombobox->currentIndex())
+    {
+        fromSelectCombobox->setCurrentIndex(index);
+    }
 }
 
 void BankWindow::tranferFunds()
 {
+        float toSum = 0;
+        float fromSum = 0;
+        float fromAccountBalance = (rowOneLabels[2]->text().toFloat());
+        float toAccountBalance = (rowTwoLabels[2]->text().toFloat());
+        float transferFunds =(transferLineEdit->text().toFloat());
 
+        if (transferFunds < 0)
+        {
+            transferLineEdit->setText(tr("0.0"));
+        }
+        if (transferFunds  > (fromAccountBalance
+                              + chkAcc->getOverDraftFee()
+                              + chkAcc->getOverDraft()))
+                //transferring too much
+        {
+            transferError();
+        }
+        if (((fromAccountBalance) - transferFunds) > 0)
+        {
+                    toSum = toAccountBalance + transferFunds;
+                    fromSum = fromAccountBalance - transferFunds;
+                    transferLineEdit->setText(tr(""));
+                    transferMoney(toSum, fromSum);
+                    cancelTransfer(); //after transfer reset window and return
+         }
 }
 
+void BankWindow::transferError()
+{
+     transferLineEdit->setText(tr("0.0"));
+     fromSelectCombobox->setCurrentIndex(0);
+     toSelectCombobox->setCurrentIndex(0);
+     rowOneLabels[2]->setText(tr("   Insufficient"));
+     rowTwoLabels[2]->setText(tr("       Funds!"));
+
+}
+void BankWindow::transferMoney(float newToBalance, float newFromBalance)
+{
+    if (toSelectCombobox->currentIndex() == 1)
+    {
+        chkAcc->setBalance(newFromBalance);
+        savAcc->setBalance(newToBalance);
+        chkAcc->setDate((QDate::currentDate().toString(Qt::ISODate)));
+        savAcc->setDate((QDate::currentDate().toString(Qt::ISODate)));
+
+    }
+    else
+    {
+        savAcc->setBalance(newFromBalance);
+        chkAcc->setBalance(newToBalance);
+        chkAcc->setDate((QDate::currentDate().toString(Qt::ISODate)));
+        savAcc->setDate((QDate::currentDate().toString(Qt::ISODate)));
+
+     }
+    chooseToAccount(0);
+    chooseFromAccount(0);
+}
+
+void BankWindow::cancelTransfer()
+{
+    transferLineEdit->setText(tr(""));
+    fromSelectCombobox->setCurrentIndex(0);
+    toSelectCombobox->setCurrentIndex(0);
+    summaryWindow();
+}

@@ -12,7 +12,7 @@ Checkingaccount::Checkingaccount(int IdNbr, QString owner
     setOwner(owner);
     setBalance(balance);
     setDate(date);
-     accountType = "Checking";
+    accountType = "Checking";
 
 }
 
@@ -61,9 +61,13 @@ QString Checkingaccount::getDate()
     return update;
 }
 
-int Checkingaccount::getOverDraftFee()
+float Checkingaccount::getOverDraftFee()
 {
     return overDraftFee;
+}
+float Checkingaccount::getOverDraft()
+{
+    return maxOverDraft;
 }
 
 QString Checkingaccount::getAccountType()

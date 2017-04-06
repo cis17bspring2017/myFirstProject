@@ -29,6 +29,9 @@ public:
     //BankWindow();
     BankWindow(Checkingaccount* , Savingsaccount* );
 
+    void transferError();
+    void transferMoney(float, float);
+
     enum
     {
         numNavButtons = 4,
@@ -47,6 +50,7 @@ public slots:
     void chooseToAccount(int);
     void chooseFromAccount(int);
     void tranferFunds();
+    void cancelTransfer();
 
 private:
     void createBankGridGroupBox();

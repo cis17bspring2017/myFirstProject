@@ -17,16 +17,18 @@ class Checkingaccount
         QString getOwner();
         float getBalance();
         QString getDate();
-        int getOverDraftFee();
+        float getOverDraftFee();
+        float getOverDraft();
         QString getAccountType();
 
     protected:
         QString accountType;
-        const int overDraftFee = 35; //in dollars
+        const float overDraftFee = 35; //in dollars
         int accountId = 0;
-        double accountBalance= 0;
+        float accountBalance= 0;
         QString userName;
         QString update;
+        float maxOverDraft = 300.00;
 
 
     private:
