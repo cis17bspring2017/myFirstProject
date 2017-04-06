@@ -96,7 +96,11 @@ void BankWindow::createBankGridGroupBox()
         toSelectCombobox->insertItem(1, "Checking");
         toSelectCombobox->insertItem(2, "Savings");
         transferLineEdit = new QLineEdit;
-        transferLineEdit->setValidator( new QDoubleValidator(0, 10000000, 2, this) );//not expected to have more than $10,000,000
+        //transferLineEdit->setValidator(new QDoubleValidator(0, 10000000, this));//not expected to have more than $10,000,000
+        QDoubleValidator* doubleValidator = new QDoubleValidator(0, 9999999, 2, this);
+        doubleValidator->setNotation(QDoubleValidator::StandardNotation);
+        transferLineEdit->setValidator(doubleValidator);
+        //http://stackoverflow.com/questions/10119310/qdoublevalidator-is-not-working
 
         windowLayout->addWidget(buttonsSavings,2,0);
         windowLayout->addWidget(buttonsChecking,3,0);
@@ -312,7 +316,7 @@ void BankWindow::savingsBalanceWindow()
     //column Labels
     for (int i = 0; i < numColLabels; ++i)
     {
-        columnLabels[i]->setText(chkBalColNames[i]);
+        columnLabels[i]->setText(savBalColNames[i]);
     }
 
     //first row of fields
