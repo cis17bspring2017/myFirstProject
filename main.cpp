@@ -1,17 +1,24 @@
 #include "checkingaccount.h"
 #include "bankwindow.h"
 #include "savingsaccount.h"
+#include "loginwindow.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    Checkingaccount* firstAccount = new Checkingaccount(1,  "I M Rich", 1000.25, "3/27/2017" );
-    Savingsaccount* secondAccount = new Savingsaccount(2,  "I M Rich", 13777.25, "2/31/2017");
+    Checkingaccount* firstAccount = new Checkingaccount(1,  "Rich", 1000.25, "2017-3-27" );
+    Savingsaccount* secondAccount = new Savingsaccount(2,  "Rich", 13777.25, "2017-2-31");
+
+    LoginWindow login(firstAccount);
+    login.show();
+
+    login.exec();
+
+
 
     BankWindow bob(firstAccount, secondAccount);
-
     bob.show();
 
-    return app.exec();
+     return app.exec();
 }

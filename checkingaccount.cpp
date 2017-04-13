@@ -74,3 +74,44 @@ QString Checkingaccount::getAccountType()
 {
     return accountType;
 }
+
+void Checkingaccount::updateAttemptPassword(QString passwordEntry)
+{
+    QCharRef c = passwordEntry[passwordEntry.length()-1];
+    QString attemptPassword = attemptPassword + c;
+
+}
+
+void Checkingaccount::checknamePassword(QString trialName,  QString trialPassword)
+{
+    QString storedUserName = this->getUserName();
+    QString storedUserPassword = this->getUserPassword();
+
+
+    if ((trialName == storedUserName)
+            && (trialPassword == storedUserPassword))
+        {
+                 this->setCredentialCheck();
+        }
+}
+
+QString Checkingaccount::getUserName()
+{
+    return userLoginName;
+}
+
+QString Checkingaccount::getUserPassword()
+{
+    return userLoginPassword;
+}
+void Checkingaccount::setCredentialCheck()
+{
+    credentialCheck = true;
+    
+}
+
+bool Checkingaccount::getCredentialCheck()
+{
+    return credentialCheck;
+
+}

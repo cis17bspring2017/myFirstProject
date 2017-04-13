@@ -9,9 +9,11 @@ SOURCES += \
     main.cpp \
     bankwindow.cpp\
    checkingaccount.cpp\
-    savingsaccount.cpp
+    savingsaccount.cpp \
+    loginwindow.cpp
 
 HEADERS += \
     bankwindow.h\
    checkingaccount.h\
-    savingsaccount.h
+    savingsaccount.h \
+    loginwindow.h
