@@ -14,7 +14,7 @@ BankWindow::BankWindow(Checkingaccount* cAcc, Savingsaccount* sAcc)
     savAcc = sAcc;
     chkAcc = cAcc;
 
-   // loginToBank(chkAcc);
+    // loginToBank(chkAcc);
     //LoginWindow login(chkAcc);
 
 
@@ -26,25 +26,25 @@ BankWindow::BankWindow(Checkingaccount* cAcc, Savingsaccount* sAcc)
 
 
     connect( buttonsNav2, SIGNAL(clicked()),
-                this, SLOT(transferWindow()));
+             this, SLOT(transferWindow()));
     connect( buttonsNav1, SIGNAL(clicked()),
-                this, SLOT(summaryWindow()));//opening Window
+             this, SLOT(summaryWindow()));//opening Window
     connect( buttonsNav3, SIGNAL(clicked()),
-                this, SLOT(historyWindow()));
+             this, SLOT(historyWindow()));
     connect( buttonsNav4, SIGNAL(clicked()),
-                this, SLOT(exitWindow()));
+             this, SLOT(exitWindow()));
     connect( buttonsChecking, SIGNAL(clicked()),
-                this, SLOT(checkBalanceWindow()));
+             this, SLOT(checkBalanceWindow()));
     connect( buttonsSavings, SIGNAL(clicked()),
-                this, SLOT(savingsBalanceWindow()));
+             this, SLOT(savingsBalanceWindow()));
     connect( toSelectCombobox, SIGNAL(currentIndexChanged(int)),
-                this, SLOT(chooseToAccount(int)));
+             this, SLOT(chooseToAccount(int)));
     connect( fromSelectCombobox, SIGNAL(currentIndexChanged(int)),
-                this, SLOT(chooseFromAccount(int)));
+             this, SLOT(chooseFromAccount(int)));
     connect( buttonsYesTransfer, SIGNAL(clicked()),
-                this, SLOT(tranferFunds()));
+             this, SLOT(tranferFunds()));
     connect( buttonsNoCancel, SIGNAL(clicked()),
-                this, SLOT(cancelTransfer()));
+             this, SLOT(cancelTransfer()));
 }
 
 void BankWindow::loginToBank(Checkingaccount *chkAcc)
@@ -55,132 +55,132 @@ void BankWindow::loginToBank(Checkingaccount *chkAcc)
 }
 
 void BankWindow::createBankGridGroupBox()
- {  // creates gridGroupBox,widgets and windowLayout
+{  // creates gridGroupBox,widgets and windowLayout
 
-        gridGroupBox = new QGroupBox();
-        this->setWindowTitle(windowLabel);
-        QFont font ("Tahoma",10,60);
-        this->setFont(font);
-        //column Labels
-        for (int i = 0; i < numGridRows; i++)
-        {
-            columnLabels[i] = new QLabel(SummColNames[i]);
-            windowLayout->addWidget(columnLabels[i],1,i);
-        }
-        //first row of fields
-        for (int i = 0; i < numGridColumns; ++i)
-        {
-            rowOneLabels[i] = new QLabel(tr(""));
-            windowLayout->addWidget(rowOneLabels[i],2,i);
-        }
-        //second row of fields
-        for (int i = 0; i < numGridColumns; ++i)
-        {
-            rowTwoLabels[i] = new QLabel(tr(""));
-            windowLayout->addWidget(rowTwoLabels[i],3,i);
-        }
-        //third row of fields
-        for (int i = 0; i < numGridColumns; ++i)
-        {
-            rowThreeLabels[i] = new QLabel(tr(""));
-            windowLayout->addWidget(rowThreeLabels[i],4,i);
-        }
+    gridGroupBox = new QGroupBox();
+    this->setWindowTitle(windowLabel);
+    QFont font ("Tahoma",10,60);
+    this->setFont(font);
+    //column Labels
+    for (int i = 0; i < numGridRows; i++)
+    {
+        columnLabels[i] = new QLabel(SummColNames[i]);
+        windowLayout->addWidget(columnLabels[i],1,i);
+    }
+    //first row of fields
+    for (int i = 0; i < numGridColumns; ++i)
+    {
+        rowOneLabels[i] = new QLabel(tr(""));
+        windowLayout->addWidget(rowOneLabels[i],2,i);
+    }
+    //second row of fields
+    for (int i = 0; i < numGridColumns; ++i)
+    {
+        rowTwoLabels[i] = new QLabel(tr(""));
+        windowLayout->addWidget(rowTwoLabels[i],3,i);
+    }
+    //third row of fields
+    for (int i = 0; i < numGridColumns; ++i)
+    {
+        rowThreeLabels[i] = new QLabel(tr(""));
+        windowLayout->addWidget(rowThreeLabels[i],4,i);
+    }
 
-        buttonsNav1 = new QPushButton(tr("Summary"));
-        buttonsNav2 = new QPushButton(tr("Transfer"));
-        buttonsNav3 = new QPushButton(tr("History"));
-        buttonsNav4 = new QPushButton(tr("Exit"));
-        buttonsChecking = new QPushButton(tr("Checking"));
-        buttonsSavings = new QPushButton(tr("Savings"));
-        buttonsYesTransfer = new QPushButton(tr("Yes, Transfer"));
-        buttonsNoCancel = new QPushButton(tr("No, Cancel"));
-        fromSelectCombobox = new QComboBox;
-        fromSelectCombobox->insertItem(0 ,"Select Account");
-        fromSelectCombobox->insertItem(1, "Checking");
-        fromSelectCombobox->insertItem(2, "Savings");
-        toSelectCombobox = new QComboBox;
-        toSelectCombobox->insertItem(0 ,"Select Account");
-        toSelectCombobox->insertItem(1, "Checking");
-        toSelectCombobox->insertItem(2, "Savings");
-        transferLineEdit = new QLineEdit;
-        QDoubleValidator* doubleValidator = new QDoubleValidator(0, 9999999, 2, this);
-        doubleValidator->setNotation(QDoubleValidator::StandardNotation);
-        transferLineEdit->setValidator(doubleValidator);
+    buttonsNav1 = new QPushButton(tr("Summary"));
+    buttonsNav2 = new QPushButton(tr("Transfer"));
+    buttonsNav3 = new QPushButton(tr("History"));
+    buttonsNav4 = new QPushButton(tr("Exit"));
+    buttonsChecking = new QPushButton(tr("Checking"));
+    buttonsSavings = new QPushButton(tr("Savings"));
+    buttonsYesTransfer = new QPushButton(tr("Yes, Transfer"));
+    buttonsNoCancel = new QPushButton(tr("No, Cancel"));
+    fromSelectCombobox = new QComboBox;
+    fromSelectCombobox->insertItem(0 ,"Select Account");
+    fromSelectCombobox->insertItem(1, "Checking");
+    fromSelectCombobox->insertItem(2, "Savings");
+    toSelectCombobox = new QComboBox;
+    toSelectCombobox->insertItem(0 ,"Select Account");
+    toSelectCombobox->insertItem(1, "Checking");
+    toSelectCombobox->insertItem(2, "Savings");
+    transferLineEdit = new QLineEdit;
+    QDoubleValidator* doubleValidator = new QDoubleValidator(0, 9999999, 2, this);
+    doubleValidator->setNotation(QDoubleValidator::StandardNotation);
+    transferLineEdit->setValidator(doubleValidator);
 
-        windowLayout->addWidget(buttonsSavings,3,0);
-        windowLayout->addWidget(buttonsChecking,2,0);
-        windowLayout->addWidget(buttonsNav1,5,1);
-        windowLayout->addWidget(buttonsNav2,5,2);
-        windowLayout->addWidget(buttonsNav3,5,3);
-        windowLayout->addWidget(buttonsNav4,5,4);
-        windowLayout->addWidget(fromSelectCombobox,2,0);
-        windowLayout->addWidget(toSelectCombobox,3,0);
-        windowLayout->addWidget(buttonsYesTransfer,4,2);
-        windowLayout->addWidget(buttonsNoCancel,4,3);
-        windowLayout->addWidget(transferLineEdit,2,3);
+    windowLayout->addWidget(buttonsSavings,3,0);
+    windowLayout->addWidget(buttonsChecking,2,0);
+    windowLayout->addWidget(buttonsNav1,5,1);
+    windowLayout->addWidget(buttonsNav2,5,2);
+    windowLayout->addWidget(buttonsNav3,5,3);
+    windowLayout->addWidget(buttonsNav4,5,4);
+    windowLayout->addWidget(fromSelectCombobox,2,0);
+    windowLayout->addWidget(toSelectCombobox,3,0);
+    windowLayout->addWidget(buttonsYesTransfer,4,2);
+    windowLayout->addWidget(buttonsNoCancel,4,3);
+    windowLayout->addWidget(transferLineEdit,2,3);
 
-        gridGroupBox->setLayout(windowLayout);
+    gridGroupBox->setLayout(windowLayout);
 
-        setWindowTitle(windowLabel);
+    setWindowTitle(windowLabel);
 
- }
+}
 
 
- void BankWindow::summaryWindow()
- {  //setText() is used to change label text
+void BankWindow::summaryWindow()
+{  //setText() is used to change label text
 
-     setWindowLabel("Summary Window");
-     this->setWindowTitle(windowLabel);
-     gridGroupBox->setTitle(tr("Select Account or choose other function."));
+    setWindowLabel("Summary Window");
+    this->setWindowTitle(windowLabel);
+    gridGroupBox->setTitle(tr("Select Account or choose other function."));
 
-     //define column labels
-     for (int i = 0; i < numGridRows; ++i)
-     {
+    //define column labels
+    for (int i = 0; i < numGridRows; ++i)
+    {
         columnLabels[i]->setText(SummColNames[i]);
-     }
+    }
 
-     //first row of fields
-      rowOneLabels[0]->setText(tr(""));
-      rowOneLabels[1]->setText(chkAcc->getAccountType());
-      rowOneLabels[2]->setText(QString::number(chkAcc->getBalance()));
-      rowOneLabels[3]->setText(chkAcc->getDate());
-      rowOneLabels[4]->setText(tr(""));
+    //first row of fields
+    rowOneLabels[0]->setText(tr(""));
+    rowOneLabels[1]->setText(chkAcc->getAccountType());
+    rowOneLabels[2]->setText(QString::number(chkAcc->getBalance()));
+    rowOneLabels[3]->setText(chkAcc->getDate());
+    rowOneLabels[4]->setText(tr(""));
 
 
-     //second row of fields
-      rowTwoLabels[0]->setText(tr(""));
-      rowTwoLabels[1]->setText(savAcc->getAccountType());
-      rowTwoLabels[2]->setText(QString::number(savAcc->getAccountBalance()));
-      rowTwoLabels[3]->setText(savAcc->getUpdate());
-      rowTwoLabels[4]->setText(tr(""));
+    //second row of fields
+    rowTwoLabels[0]->setText(tr(""));
+    rowTwoLabels[1]->setText(savAcc->getAccountType());
+    rowTwoLabels[2]->setText(QString::number(savAcc->getAccountBalance()));
+    rowTwoLabels[3]->setText(savAcc->getUpdate());
+    rowTwoLabels[4]->setText(tr(""));
 
-     //third row of fields
-     for (int i = 0; i < numGridColumns; ++i)
-     {
+    //third row of fields
+    for (int i = 0; i < numGridColumns; ++i)
+    {
         rowThreeLabels[i]->setText(tr(""));
         //windowLayout->addWidget(rowThreeLabels[i],3,i);
-     }
-     gridGroupBox->setLayout(windowLayout);
-     setLayout(windowLayout);
+    }
+    gridGroupBox->setLayout(windowLayout);
+    setLayout(windowLayout);
 
-     buttonsNav1->hide();
-     buttonsNav2->show();
-     buttonsNav3->hide();
-     buttonsNav4->show();
-     toSelectCombobox->hide();
-     fromSelectCombobox->hide();
-     buttonsYesTransfer->hide();
-     buttonsNoCancel->hide();
-     buttonsChecking->show();
-     buttonsSavings->show();
-     transferLineEdit->hide();
-     makeWindow();
+    buttonsNav1->hide();
+    buttonsNav2->show();
+    buttonsNav3->hide();
+    buttonsNav4->show();
+    toSelectCombobox->hide();
+    fromSelectCombobox->hide();
+    buttonsYesTransfer->hide();
+    buttonsNoCancel->hide();
+    buttonsChecking->show();
+    buttonsSavings->show();
+    transferLineEdit->hide();
+    makeWindow();
 
- }
+}
 
- void BankWindow::transferWindow()
- {
-     //windowLayout->removeWidget(gridGroupBox);
+void BankWindow::transferWindow()
+{
+    //windowLayout->removeWidget(gridGroupBox);
     setWindowLabel("Transfer Window");
 
     this->setWindowTitle(windowLabel);
@@ -220,11 +220,11 @@ void BankWindow::createBankGridGroupBox()
     transferLineEdit->show();
 
     makeWindow();
- }
+}
 
 
- void BankWindow::historyWindow()
- {
+void BankWindow::historyWindow()
+{
     setWindowLabel("History Window");
 
     //column Labels
@@ -260,13 +260,13 @@ void BankWindow::createBankGridGroupBox()
     fromSelectCombobox->hide();
 
     makeWindow();
-  }
+}
 
- void BankWindow::exitWindow()
- {
-     //close window, end app
-     close();
- }
+void BankWindow::exitWindow()
+{
+    //close window, end app
+    close();
+}
 
 void BankWindow::setWindowLabel(QString newLabel)
 {
@@ -291,11 +291,11 @@ void BankWindow::checkBalanceWindow()
     }
 
     //first row of fields
-     rowOneLabels[0]->setText(chkAcc->getAccountType());
-     rowOneLabels[1]->setText(chkAcc->getOwner());
-     rowOneLabels[2]->setText(QString::number(chkAcc->getBalance()));
-     rowOneLabels[3]->setText(QString::number(chkAcc->getOverDraftFee()));
-     rowOneLabels[4]->setText(chkAcc->getDate());
+    rowOneLabels[0]->setText(chkAcc->getAccountType());
+    rowOneLabels[1]->setText(chkAcc->getOwner());
+    rowOneLabels[2]->setText(QString::number(chkAcc->getBalance()));
+    rowOneLabels[3]->setText(QString::number(chkAcc->getOverDraftFee()));
+    rowOneLabels[4]->setText(chkAcc->getDate());
 
 
     //second row of fields
@@ -325,11 +325,11 @@ void BankWindow::savingsBalanceWindow()
     }
 
     //first row of fields
-     rowOneLabels[0]->setText(savAcc->getAccountType());
-     rowOneLabels[1]->setText(savAcc->getUserName());
-     rowOneLabels[2]->setText(QString::number(savAcc->getAccountBalance()));
-     rowOneLabels[3]->setText(QString::number(savAcc->getInterestRate()));
-     rowOneLabels[4]->setText(savAcc->getUpdate());
+    rowOneLabels[0]->setText(savAcc->getAccountType());
+    rowOneLabels[1]->setText(savAcc->getUserName());
+    rowOneLabels[2]->setText(QString::number(savAcc->getAccountBalance()));
+    rowOneLabels[3]->setText(QString::number(savAcc->getInterestRate()));
+    rowOneLabels[4]->setText(savAcc->getUpdate());
 
 
     //second row of fields
@@ -344,32 +344,32 @@ void BankWindow::savingsBalanceWindow()
 
 void BankWindow::makeWindow()
 {
-   mainLayout->addWidget(gridGroupBox);
-   setLayout(mainLayout);
+    mainLayout->addWidget(gridGroupBox);
+    setLayout(mainLayout);
 }
 
 void BankWindow::chooseToAccount(int index)
 {
-        switch (index)
-        {
-        case 0: //clear account info
-            rowTwoLabels[2]->setText("");
+    switch (index)
+    {
+    case 0: //clear account info
+        rowTwoLabels[2]->setText("");
         break;
-        case 1: //read checking account info
-            rowTwoLabels[2]->setText(QString::number(chkAcc->getBalance()));
+    case 1: //read checking account info
+        rowTwoLabels[2]->setText(QString::number(chkAcc->getBalance()));
         break;
-        case 2: //read savings accoutn info
-            rowTwoLabels[2]->setText(QString::number(savAcc->getAccountBalance()));
+    case 2: //read savings accoutn info
+        rowTwoLabels[2]->setText(QString::number(savAcc->getAccountBalance()));
         break;
-         }
-        if (index == fromSelectCombobox->currentIndex())
-        {
-            fromSelectCombobox->setCurrentIndex(0);
-        }
-        if (index != toSelectCombobox->currentIndex())
-        {
-            toSelectCombobox->setCurrentIndex(index);
-        }
+    }
+    if (index == fromSelectCombobox->currentIndex())
+    {
+        fromSelectCombobox->setCurrentIndex(0);
+    }
+    if (index != toSelectCombobox->currentIndex())
+    {
+        toSelectCombobox->setCurrentIndex(index);
+    }
 }
 
 void BankWindow::chooseFromAccount(int index)
@@ -378,13 +378,13 @@ void BankWindow::chooseFromAccount(int index)
     {
     case 0: //clear account info
         rowOneLabels[2]->setText("");
-    break;
+        break;
     case 1: //read checking account info
         rowOneLabels[2]->setText(QString::number(chkAcc->getBalance()));
-    break;
+        break;
     case 2: //read savings accoutn info
         rowOneLabels[2]->setText(QString::number(savAcc->getAccountBalance()));
-    break;
+        break;
 
     }
     if (index == toSelectCombobox->currentIndex())
@@ -399,64 +399,64 @@ void BankWindow::chooseFromAccount(int index)
 
 void BankWindow::tranferFunds()
 {
-        float toSum = 0;
-        float fromSum = 0;
-        float fromAccountBalance = (rowOneLabels[2]->text().toFloat());
-        float toAccountBalance = (rowTwoLabels[2]->text().toFloat());
-        float transferFunds =(transferLineEdit->text().toFloat());
+    float toSum = 0;
+    float fromSum = 0;
+    float fromAccountBalance = (rowOneLabels[2]->text().toFloat());
+    float toAccountBalance = (rowTwoLabels[2]->text().toFloat());
+    float transferFunds =(transferLineEdit->text().toFloat());
 
-        if (toSelectCombobox->currentIndex() > 0 && fromSelectCombobox->currentIndex() > 0)
+    if (toSelectCombobox->currentIndex() > 0 && fromSelectCombobox->currentIndex() > 0)
+    {
+        if (transferFunds < 0)
         {
-            if (transferFunds < 0)
-            {
-                transferLineEdit->setText(tr("0.0"));
-            }
-            else if (transferFunds  > (fromAccountBalance
-                                       + chkAcc->getOverDraftFee()
-                                       + chkAcc->getOverDraft()))
-                //transferring too much
+            transferLineEdit->setText(tr("0.0"));
+        }
+        else if (transferFunds  > (fromAccountBalance
+                                   + chkAcc->getOverDraftFee()
+                                   + chkAcc->getOverDraft()))
+            //transferring too much
+        {
+            transferError();
+        }
+        else if (((fromAccountBalance) - transferFunds) >= 0)
+        {
+            toSum = toAccountBalance + transferFunds;
+            fromSum = fromAccountBalance - transferFunds;
+            transferLineEdit->setText(tr(""));
+            transferMoney(toSum, fromSum);
+            cancelTransfer(); //after transfer reset window and return
+        }
+        else if (transferFunds  <= (fromAccountBalance
+                                    + chkAcc->getOverDraftFee()
+                                    + chkAcc->getOverDraft()) && ((fromAccountBalance -transferFunds)< 0) )
+        {
+            if (fromSelectCombobox->currentIndex() == 2)
             {
                 transferError();
             }
-            else if (((fromAccountBalance) - transferFunds) >= 0)
+            else
             {
                 toSum = toAccountBalance + transferFunds;
-                fromSum = fromAccountBalance - transferFunds;
+                fromSum = fromAccountBalance
+                        - (transferFunds + chkAcc->getOverDraftFee());
                 transferLineEdit->setText(tr(""));
                 transferMoney(toSum, fromSum);
                 cancelTransfer(); //after transfer reset window and return
             }
-            else if (transferFunds  <= (fromAccountBalance
-                                        + chkAcc->getOverDraftFee()
-                                        + chkAcc->getOverDraft()) && ((fromAccountBalance -transferFunds)< 0) )
-            {
-                if (fromSelectCombobox->currentIndex() == 2)
-                {
-                    transferError();
-                }
-                else
-                {
-                    toSum = toAccountBalance + transferFunds;
-                    fromSum = fromAccountBalance
-                            - (transferFunds + chkAcc->getOverDraftFee());
-                    transferLineEdit->setText(tr(""));
-                    transferMoney(toSum, fromSum);
-                    cancelTransfer(); //after transfer reset window and return
-                }
-            }
         }
-        else
-        {selectError();}
+    }
+    else
+    {selectError();}
 
 }
 
 void BankWindow::transferError()
 {
-     transferLineEdit->setText(tr("0.0"));
-     fromSelectCombobox->setCurrentIndex(0);
-     toSelectCombobox->setCurrentIndex(0);
-     rowOneLabels[2]->setText(tr("   Insufficient"));
-     rowTwoLabels[2]->setText(tr("       Funds!"));
+    transferLineEdit->setText(tr("0.0"));
+    fromSelectCombobox->setCurrentIndex(0);
+    toSelectCombobox->setCurrentIndex(0);
+    rowOneLabels[2]->setText(tr("   Insufficient"));
+    rowTwoLabels[2]->setText(tr("       Funds!"));
 
 }
 void BankWindow::transferMoney(float newToBalance, float newFromBalance)
@@ -476,7 +476,7 @@ void BankWindow::transferMoney(float newToBalance, float newFromBalance)
         chkAcc->setDate((QDate::currentDate().toString(Qt::ISODate)));
         savAcc->setDate((QDate::currentDate().toString(Qt::ISODate)));
 
-     }
+    }
     chooseToAccount(0);
     chooseFromAccount(0);
 }
@@ -497,6 +497,6 @@ void BankWindow::selectError()
     }
     if (toSelectCombobox->currentIndex() == 0)
     {
-    rowTwoLabels[2]->setText(tr("Select Account"));
+        rowTwoLabels[2]->setText(tr("Select Account"));
     }
 }

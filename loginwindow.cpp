@@ -76,6 +76,7 @@ void LoginWindow::checkNamePassword()
 void LoginWindow::cancelLogin()
 {
     close();
+    parentWidget()->close();
 }
 
 

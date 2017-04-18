@@ -16,9 +16,11 @@ int main(int argc, char *argv[])
     login.exec();
 
 
-
-    BankWindow bob(firstAccount, secondAccount);
-    bob.show();
-
-     return app.exec();
+    if (firstAccount->getCredentialCheck() == true)
+    {
+        BankWindow bob(firstAccount, secondAccount);
+        bob.show();
+        bob.exec();
+    }
+    return app.exec();
 }

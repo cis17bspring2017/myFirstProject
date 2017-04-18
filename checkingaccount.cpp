@@ -90,9 +90,9 @@ void Checkingaccount::checknamePassword(QString trialName,  QString trialPasswor
 
     if ((trialName == storedUserName)
             && (trialPassword == storedUserPassword))
-        {
-                 this->setCredentialCheck();
-        }
+    {
+        this->setCredentialCheck();
+    }
 }
 
 QString Checkingaccount::getUserName()
