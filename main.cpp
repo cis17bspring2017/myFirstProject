@@ -1,20 +1,18 @@
-//reference http://www.ics.com/files/qtdocs/layouts-basiclayouts.html
-//CIS17B, Spring 2017 Jon LaRock and Greg Hanna
-#include <Qwidget>
 #include <QApplication>
 
-
-#include "banksoftware.h"
-
+#include "lifemainwindow.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
+    QApplication a(argc, argv);
+    a.setApplicationName("Conway's Game of Life (QtConcurrent Version)");
+    a.setOrganizationDomain("objectlearning.net");
+    LifeMainWindow w;
+#if defined(Q_WS_S60)
+    w.showMaximized();
+#else
+    w.show();
+#endif
 
-    bankSoftware();
-
-    return app.exec();
+    return a.exec();
 }
-
-
-
